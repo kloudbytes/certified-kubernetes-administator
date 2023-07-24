@@ -1,1 +1,123 @@
 
+# K8s - Cluster setup:
+--------------------
+
+## 1. ALL NODES: Complete this task to all nodes:
+---------------------------------------------
+sed -i '/swap/d' /etc/fstab
+swapoff -a
+--
+
+systemctl disable --now ufw >/dev/null 2>&1
+
+--
+cat >>/etc/modules-load.d/containerd.conf<<EOF
+overlay
+br_netfilter
+EOF
+
+modprobe overlay
+modprobe br_netfilter
+--
+
+cat >>/etc/sysctl.d/kubernetes.conf<<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
+EOF
+
+--
+sysctl --system >/dev/null 2>&1
+
+--
+
+apt update -qq >/dev/null 2>&1
+apt install -qq -y ca-certificates curl gnupg lsb-release >/dev/null 2>&1
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg >/dev/null 2>&1
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update -qq >/dev/null 2>&1
+apt install -qq -y containerd.io >/dev/null 2>&1
+containerd config default > /etc/containerd/config.toml
+sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+systemctl restart containerd
+systemctl enable containerd >/dev/null 2>&1
+
+--
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - >/dev/null 2>&1
+apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main" >/dev/null 2>&1
+
+--
+
+
+apt install -qq -y kubeadm=1.27.0-00 kubelet=1.27.0-00 kubectl=1.27.0-00 >/dev/null 2>&1
+
+--
+echo "[TASK 7.1] Install net-tools components (ifconfig )"
+apt install -qq -y net-tools >/dev/null 2>&1
+
+--
+
+sed -i 's/^PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+systemctl reload sshd
+
+
+--
+
+echo -e "kloudbytes\nkloudbytes" | passwd root >/dev/null 2>&1
+echo "export TERM=xterm" >> /etc/bash.bashrc
+
+--
+
+cat >>/etc/hosts<<EOF
+172.16.0.100   k8s-master.kloudbytes.com     master   m1
+172.16.0.101   k8s-worker1.kloudbytes.com    worker1  w1
+172.16.0.102   k8s-worker2.kloudbytes.com    worker2  w2
+EOF
+
+--
+# Complete this task to Master Node:
+----------------------------------
+
+kubeadm config images pull
+kubeadm init --apiserver-advertise-address=172.16.0.100 --pod-network-cidr=192.168.0.0/16 
+
+***NOTE****: please save the token for joiner command or execute below command in master node for add worker node to master in future.
+
+kubeadm token create --print-join-command
+
+--
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
+kubectl create -f custom-resources.yaml
+
+--
+
+kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml
+
+kubeadm token create --print-join-command
+
+### Note: output this for join worker node to master node. This output cmd have to execute in worker.
+
+---
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+export KUBECONFIG=$HOME/.kube/config
+echo 'export KUBECONFIG=$HOME/.kube/config' >> $HOME/.bashrc
+
+
+
+# 3. WORKER NODE: Exexute on worker nodes:
+-----------------------------------------
+### NOTE: execute below cmd which you got in "kubeadm token create --print-join-command" in master server:
+
+kubeadm join 172.16.0.100:6443 --token 9v3npz.q0hps6jvpnartvo --discovery-token-ca-cert-hash sha256:12b826c0f5700a2521082f0d3ca71aadc347a94c4503572043fb523485caffc
+
+
+
