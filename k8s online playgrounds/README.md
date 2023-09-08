@@ -2,7 +2,7 @@
 K8s online playgrounds are web-based platforms that allow users to interactively explore and learn Kubernetes (K8s) without the need for local installations. These playgrounds typically offer pre-configured Kubernetes clusters in a sandbox environment where users can experiment with deploying, managing, and scaling containerized applications.
 
 # 1. Killercoda [https://killercoda.com/]
-# 2. Docker [ https://training.play-with-kubernetes.com/kubernetes-workshop/ ]
+# 2. Docker [ [(https://labs.play-with-k8s.com/)]
 
 ## 1. What is Killercoda?
 
