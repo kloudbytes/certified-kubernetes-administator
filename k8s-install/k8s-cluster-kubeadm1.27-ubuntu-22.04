@@ -83,9 +83,9 @@ EOF
 kubeadm config images pull
 kubeadm init --apiserver-advertise-address=172.16.0.110 --pod-network-cidr=192.168.0.0/16 
 
-***NOTE****: please save the token for joiner command or execute below command in master node for add worker node to master in future.
+***NOTE****: please save the token for the joiner command or execute below command in master node for add worker node to master in future.
 
-kubeadm token create --print-join-command
+Note: if you not noted then execute this command, $kubeadm token create --print-join-command
 
 --
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
