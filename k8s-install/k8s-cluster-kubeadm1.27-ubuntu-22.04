@@ -58,25 +58,22 @@ apt install -qq -y kubeadm=1.27.0-00 kubelet=1.27.0-00 kubectl=1.27.0-00 >/dev/n
 --
 echo "[TASK 7.1] Install net-tools components (ifconfig )"
 apt install -qq -y net-tools >/dev/null 2>&1
-
 --
 
+echo "[TASK 8] Enable ssh password authentication"
 sed -i 's/^PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 systemctl reload sshd
 
-
---
-
-echo -e "kloudbytes\nkloudbytes" | passwd root >/dev/null 2>&1
+echo "[TASK 9] Set root password"
+echo -e "admin\nadmin" | passwd root >/dev/null 2>&1
 echo "export TERM=xterm" >> /etc/bash.bashrc
 
---
-
+echo "[TASK 10] Update /etc/hosts file"
 cat >>/etc/hosts<<EOF
-172.16.0.100   k8s-master.kloudbytes.com     master   m1
-172.16.0.101   k8s-worker1.kloudbytes.com    worker1  w1
-172.16.0.102   k8s-worker2.kloudbytes.com    worker2  w2
+172.16.0.110   master.example.com       master   m1
+172.16.0.111   worker1.example.com      worker1  w1
+172.16.0.112   worker2.example.com      worker2  w2
 EOF
 
 --
@@ -84,7 +81,7 @@ EOF
 ----------------------------------
 
 kubeadm config images pull
-kubeadm init --apiserver-advertise-address=172.16.0.100 --pod-network-cidr=192.168.0.0/16 
+kubeadm init --apiserver-advertise-address=172.16.0.110 --pod-network-cidr=192.168.0.0/16 
 
 ***NOTE****: please save the token for joiner command or execute below command in master node for add worker node to master in future.
 
@@ -117,7 +114,7 @@ echo 'export KUBECONFIG=$HOME/.kube/config' >> $HOME/.bashrc
 -----------------------------------------
 ### NOTE: execute below cmd which you got in "kubeadm token create --print-join-command" in master server:
 
-kubeadm join 172.16.0.100:6443 --token 9v3npz.q0hps6jvpnartvo --discovery-token-ca-cert-hash sha256:12b826c0f5700a2521082f0d3ca71aadc347a94c4503572043fb523485caffc
+kubeadm join 172.16.0.110:6443 --token 9v3npz.q0hps6jvpnartvo --discovery-token-ca-cert-hash sha256:12b826c0f5700a2521082f0d3ca71aadc347a94c4503572043fb523485caffc
 
 
 
