@@ -3,8 +3,8 @@
 # Day 1:
 
 ## Kubernetes Basics
-01. []CKA Course Introduction
-02. CKA Certificate Information
-03. History Of Kubernetes
+1. [cka-course-Introduction](/docs/01-cka-course-Introduction/01-cka-course-Introduction.md)
+2. [CKA Certificate Information](docs/01-cka-course-Introduction/02-CKA-certificate-information)
+3. [History Of Kubernetes](docs/01-cka-course-Introduction/03-History-of-kuberntes)
 
 
