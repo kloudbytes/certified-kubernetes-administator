@@ -183,7 +183,7 @@ Note: with node wide option
 ```
 kubectl get cs
 ```
-# Retrive the token and ca-cert-token:
+## Retrive the token and ca-cert-token:
 
 masternode$ `openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -pubkey | openssl rsa -pubin -outform DER 2>/dev/null | sha256sum | cut -d' ' -f1`
 
@@ -197,6 +197,26 @@ hp9b0k.1g9tqz8vkf4s5h278ucwf
 
 workernode$ kubeadm join 172.16.0.100:6443 --token `hp9b0k.1g9tqz8vkf4s5h278ucwf`  --discovery-token-ca-cert-hash sha256:`32eb67948d72ba99aac9b5bb0305d66a48f43b0798cb2df99c8b1c30708bdc2cased24sf`
 
+## Internal ip needs to change on virtual machine's:
+
+### Note: Below node internal ip's showing the same. Now we are going to change the corresponding node IP address.
+```
+root@master:~# kubectl get node -o wide
+NAME      STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master    Ready    control-plane   38m   v1.28.0   10.0.2.15     <none>        Ubuntu 22.04.1 LTS   5.15.0-58-generic   containerd://1.6.24
+worker1   Ready    <none>          30s   v1.28.0   10.0.2.15     <none>        Ubuntu 22.04.1 LTS   5.15.0-58-generic   containerd://1.6.24
+```
+Note: Internal IP need to change.
+
+### Solution: 
+
+1. login to each worker node
+Note: Before editing take a backup 10-kubeadm.conf file.
+2. edit this config file: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+3.  add this line
+    > Environment="KUBELET_EXTRA_ARGS=--node-ip=`<node IP address>`"
+5.  After changes, reload your daemon and restart kubelet service in all worker nodes.  
+`systemctl daemon-reload ; systemctl restart kubelet.service`
 
 
 # "Be a lifelong student. The more you learn, the more you earn and the more self-confidence you will have." – Brian Tracy
