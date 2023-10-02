@@ -145,7 +145,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-#### Kubectl auto complete and k alias
+#### Kubectl auto-complete and k alias
 ```
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 alias k=kubectl
@@ -163,7 +163,7 @@ kubeadm join 172.16.0.100:6443 --token hp9b0k.1g9tqz8vkf4s5h278ucwf  --discovery
 ```
 
 ## Verifying the cluster (On k8s-master)
-##### Get kubernetes Cluster Nodes status
+##### Get Kubernetes Cluster Nodes status
 ```
 kubectl get nodes
 ```
