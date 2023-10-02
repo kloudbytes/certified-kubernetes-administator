@@ -218,6 +218,20 @@ Note: Before editing take a backup 10-kubeadm.conf file.
 5.  After changes, reload your daemon and restart kubelet service in all worker nodes.  
 `systemctl daemon-reload ; systemctl restart kubelet.service`
 
+### After Changes:
+```
+root@master:~# kubectl get node -o wide
+NAME      STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master    Ready    control-plane   59m   v1.28.0   172.16.0.110   <none>        Ubuntu 22.04.1 LTS   5.15.0-58-generic   containerd://1.6.24
+worker1   Ready    <none>          21m   v1.28.0   172.16.0.111   <none>        Ubuntu 22.04.1 LTS   5.15.0-58-generic   containerd://1.6.24
+
+```
+
+
+
+
+
+
 
 # "Be a lifelong student. The more you learn, the more you earn and the more self-confidence you will have." – Brian Tracy
 
