@@ -136,10 +136,11 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-#### Kubectl autocomplete and k alias
+#### Kubectl auto complete and k alias
 ```
 echo "source <(kubectl completion bash)" >> ~/.bashrc
-
+alias k=kubectl
+complete -o default -F __start_kubectl k
 ```
 
 ## On k8s-worker<*>
