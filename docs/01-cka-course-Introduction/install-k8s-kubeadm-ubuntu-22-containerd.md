@@ -10,15 +10,15 @@ Follow this documentation to set up a Kubernetes cluster on __Ubuntu 22.04 LTS__
 |kubelet|1.28.0-00|
 |kubectl|1.28.0-00|
 
-* This documentation guides you in setting up a cluster with one master node and three worker node. 
+* This documentation guides you in setting up a cluster with one master node and three worker nodes. 
 * If you desire fewer worker nodes, you can install software and join the worker nodes depending on that.
 
 ## Assumptions
 
-1. You have 4 physical or virutal machine for create kubernetes cluster.
-2. You have to assigned password of each node.
-3. Each node have to assign the corresponding hostname.
-4. If you are using any cloud provider virtual machine, kindly open the correspoing port number for the k8s cluster.
+1. You have 4 physical or virtual machines to create a Kubernetes cluster.
+2. You have to assign a password to each node.
+3. Each node has to assign the corresponding hostname.
+4. If you are using any cloud provider virtual machine, kindly open the corresponding port number for the k8s cluster.
 
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
@@ -183,6 +183,21 @@ Note: with node wide option
 ```
 kubectl get cs
 ```
+# Retrive the token and ca-cert-token:
+
+masternode$ `openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -pubkey | openssl rsa -pubin -outform DER 2>/dev/null | sha256sum | cut -d' ' -f1`
+
+32eb67948d72ba99aac9b5bb0305d66a48f43b0798cb2df99c8b1c30708bdc2cased24sf
+
+masternode$ `kubeadm token list` 
+
+hp9b0k.1g9tqz8vkf4s5h278ucwf
+
+#### After retrieving both token and ca-cert-token:
+
+workernode$ kubeadm join 172.16.0.100:6443 --token `hp9b0k.1g9tqz8vkf4s5h278ucwf`  --discovery-token-ca-cert-hash sha256:`32eb67948d72ba99aac9b5bb0305d66a48f43b0798cb2df99c8b1c30708bdc2cased24sf`
+
+
 
 # "Be a lifelong student. The more you learn, the more you earn and the more self-confidence you will have." – Brian Tracy
 
