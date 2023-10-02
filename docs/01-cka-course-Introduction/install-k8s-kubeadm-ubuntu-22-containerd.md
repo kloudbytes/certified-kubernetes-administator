@@ -84,7 +84,7 @@ sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config
 systemctl restart containerd
 systemctl enable containerd >/dev/null
 ```
-#### Add apt repo for kubernetes
+#### Add apt repo for Kubernetes
 
 ```
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 
@@ -134,7 +134,7 @@ kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectca
 ```
 kubeadm token create --print-join-command > /print-join-cluster.txt
 ```
-Note: use "print-join-cluster.txt file for future use to join worker node into k8s-master.
+Note: use the "print-join-cluster.txt file for future use to join the worker node into k8s-master.
 
 ##### To be able to run kubectl commands as non-root user
 If you want to be able to run kubectl commands as non-root user, then as a non-root user perform these
@@ -155,7 +155,7 @@ complete -o default -F __start_kubectl k
 ## On k8s-worker<*>
 ##### Join the worker node into k8s-worker<*>
 
-Use the output from __kubeadm token create__ command in previous step from the master server and run here.
+Use the output from __kubeadm token create__ command in the previous step from the master server and run here.
 
 ```
 Sample format:
@@ -173,11 +173,11 @@ kubectl get no
 kubectl get node
 kubectl get nodes
 ```
-Above commands will give same output.
+The above commands will give the same output.
 ```
 kubectl get node -o wide
 ```
-Note: with node wide optipn
+Note: with node wide option
 
 ##### Get component status
 ```
