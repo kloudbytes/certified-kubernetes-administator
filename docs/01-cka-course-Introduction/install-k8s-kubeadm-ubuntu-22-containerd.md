@@ -3,18 +3,22 @@ Follow this documentation to set up a Kubernetes cluster on __Ubuntu 22.04 LTS__
 
 ## Software and OS used here:
 
-#### OS      :  ubuntu 22.04
-#### kubeadm :  1.28.0-00
-#### kubelet :  1.28.0-00
-#### kubectl :  1.28.0-00
+|Software|Version|
+|----|----|
+|OS|ubuntu 22.04|
+|kubeadm|1.28.0-00|
+|kubelet|1.28.0-00|
+|kubectl|1.28.0-00|
 
-This documentation guides you in setting up a cluster with one master node and one worker node.
+* This documentation guides you in setting up a cluster with one master node and three worker node. 
+* If you desire fewer worker nodes, you can install software and join the worker nodes depending on that.
 
 ## Assumptions
 
 1. You have 4 physical or virutal machine for create kubernetes cluster.
 2. You have to assigned password of each node.
 3. Each node have to assign the corresponding hostname.
+4. If you are using any cloud provider virtual machine, kindly open the correspoing port number for the k8s cluster.
 
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
