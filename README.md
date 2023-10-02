@@ -6,7 +6,7 @@
 3. [History Of Kubernetes](docs/01-cka-course-Introduction/03-History-of-kuberntes)
     * Lab1
     01. [install-k8s-cluster-kubeadm-ubuntu-22-containerd](docs/01-cka-course-Introduction/install-k8s-kubeadm-ubuntu-22-containerd.md)
-    02. [isntall-k8s-cluster-kubeadm-vagrant-virtualbox](docs/01-cka-course-Introduction/isntall-k8s-cluster-kubeadm-vagrant-virtualbox.md)
+    02. [isntall-k8s-cluster-kubeadm-vagrant-virtualbox](https://github.com/kloudbytes/k8s-cluster-vagrant-provisioning/tree/main)
 
 ## Kubernetes Architecture
 1. [kubernetes components](docs/02-Kubernetes-architecture)
