@@ -4,6 +4,8 @@
 1. [cka-course-Introduction](/docs/01-cka-course-Introduction/01-cka-course-Introduction.md)
 2. [CKA Certificate Information](docs/01-cka-course-Introduction/02-CKA-certificate-information)
 3. [History Of Kubernetes](docs/01-cka-course-Introduction/03-History-of-kuberntes)
+    * Lab1
+    01. [install-k8s-kubeadm-ubuntu-22-containerd](docs/01-cka-course-Introduction/install-k8s-kubeadm-ubuntu-22-containerd.md)
 
 ## Kubernetes Architecture
 1. [kubernetes components](docs/02-Kubernetes-architecture)
