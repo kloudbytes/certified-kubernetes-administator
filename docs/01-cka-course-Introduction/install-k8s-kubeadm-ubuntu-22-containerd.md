@@ -136,6 +136,12 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
+#### Kubectl autocomplete and k alias
+```
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+
+```
+
 ## On k8s-worker<*>
 ##### Join the worker node into k8s-worker<*>
 
