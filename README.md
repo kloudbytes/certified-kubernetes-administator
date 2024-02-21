@@ -7,7 +7,7 @@
     * Lab1
     01. [install-k8s-cluster-kubeadm-ubuntu-22-containerd](docs/01-cka-course-Introduction/install-k8s-kubeadm-ubuntu-22-containerd.md)
     02. [isntall-k8s-cluster-kubeadm-vagrant-virtualbox](https://github.com/kloudbytes/k8s-cluster-vagrant-provisioning/tree/main)
-    03. [install-minikube-in-ubuntu22.04]()
+    03. [install-minikube-in-ubuntu22.04](doc/install-minikube-in-ubuntu22.04/install-minikube-in-ubuntu22.04.md)
 
 ## Kubernetes Architecture
 1. [kubernetes components](docs/02-Kubernetes-architecture)
