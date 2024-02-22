@@ -20,3 +20,16 @@
 8. [kubelet](docs/02-Kubernetes-architecture)
    
 
+## Services
+1. Whast is Services in kubernetes ?
+2. How to access applicaton outside world ?
+3. Types of Sevices ?
+ 
+
+## Storage
+
+## Networking
+
+## Configmap & Secrects
+
+
