@@ -27,7 +27,8 @@
  
 
 ## Storage
-
+1. presitent volume
+2. dynamic volume
 ## Networking
 
 ## Configmap & Secrects
