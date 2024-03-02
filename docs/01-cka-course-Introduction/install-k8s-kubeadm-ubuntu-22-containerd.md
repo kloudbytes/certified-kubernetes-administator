@@ -86,7 +86,7 @@ systemctl enable containerd >/dev/null
 ```
 # Either use v1.28 or v1.29
 
-## k8s v1.29
+## k8s v1.28
 #### Add apt repo for Kubernetes and Install Kubernetes components (kubeadm, kubelet and kubectl) v1.28
 
 ```
@@ -96,6 +96,7 @@ apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 ```
 apt install -qq -y kubeadm=1.28.0-00 kubelet=1.28.0-00 kubectl=1.28.0-00 
 ```
+# (OR)
 ## k8s v1.29
 #### Add apt repo for Kubernetes and Install Kubernetes components (kubeadm, kubelet and kubectl) v1.29
 
