@@ -19,8 +19,8 @@
 7. [kube-proxy](docs/02-Kubernetes-architecture)
 8. [kubelet](docs/02-Kubernetes-architecture)
    
-## What is pod ?
-1. pod
+## pod
+1. [what is pod] (docs/03-what-is-pod)
 ## Services
 1. Whast is Services in kubernetes ?
 2. How to access applicaton outside world ?
