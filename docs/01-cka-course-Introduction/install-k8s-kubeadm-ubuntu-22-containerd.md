@@ -143,9 +143,15 @@ Note: apiserver-advertise-address is your k8s-master ip address
 ```
 kubeadm init --apiserver-advertise-address=172.16.0.100 --pod-network-cidr=192.168.0.0/16 
 ```
-##### Deploy Calico network
+##### Deploy Calico network v1.28
 ```
 kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml
+```
+
+##### Deploy Calico network v1.29
+# add Calico 3.27.3 CNI 
+```
+kubectl apply -f  https://raw.githubusercontent.com/projectcalico/calico/v3.27.3/manifests/calico.yaml
 ```
 
 ##### Cluster join command
